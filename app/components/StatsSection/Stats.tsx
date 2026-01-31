@@ -73,7 +73,7 @@ export default function Stats() {
                             )
                         }
                     ].map((stat, index) => (
-                        <div key={index} className="group relative">
+                        <div key={index} className="group relative hover:cursor-pointer">
                             {/* Animated border effect */}
                             <div className="absolute -inset-px bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
                             
@@ -183,7 +183,7 @@ export default function Stats() {
                                 <div className="text-sm text-gray-500">já otimizaram seus processos</div>
                             </div>
                         </div>
-                        <button className="px-8 py-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold rounded-full hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                        <button className="px-8 py-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold rounded-full hover:shadow-xl transform hover:cursor-pointer hover:-translate-y-0.5 transition-all duration-300">
                             Ver demonstração
                         </button>
                     </div>

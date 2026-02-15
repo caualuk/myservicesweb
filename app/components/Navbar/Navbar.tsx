@@ -29,9 +29,11 @@ export default function Navbar() {
           <button className="cursor-pointer rounded-md bg-black px-4 py-2 text-sm font-medium border-1 text-white transition">
             Entrar
           </button>
-          <button className="cursor-pointer rounded-md bg-white px-4 py-2 text-sm font-medium border border-black text-black transition">
-            Registre-se
-          </button>
+          <Link href="/register">
+            <button className="cursor-pointer rounded-md bg-white px-4 py-2 text-sm font-medium border border-black text-black transition">
+              Registre-se
+            </button>
+          </Link>
         </div>
       </div>
     </nav>

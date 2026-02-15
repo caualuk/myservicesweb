@@ -29,7 +29,7 @@ export default function Stats() {
                     </p>
                 </div>
 
-                {/* Main Stats Grid */}
+                {/* Grid Stats Principal */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
                     {[
                         {
@@ -74,11 +74,11 @@ export default function Stats() {
                         }
                     ].map((stat, index) => (
                         <div key={index} className="group relative hover:cursor-pointer">
-                            {/* Animated border effect */}
+                            {/* Animação de borda */}
                             <div className="absolute -inset-px bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
                             
                             <div className="relative bg-white rounded-2xl p-8 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgb(0,0,0,0.08)] transition-all duration-500">
-                                {/* Icon with gradient background */}
+                                {/* Icon com degradê no background */}
                                 <div className="absolute top-8 right-8">
                                     <div className="relative">
                                         <div className="w-14 h-14 bg-gradient-to-br from-gray-900 to-gray-700 rounded-xl flex items-center justify-center shadow-lg">
@@ -89,14 +89,14 @@ export default function Stats() {
                                     </div>
                                 </div>
                                 
-                                {/* Stat value */}
+                                {/* Stats value */}
                                 <div className="mb-16">
                                     <div className="text-6xl font-bold text-gray-900 tracking-tight">
                                         {stat.value}
                                     </div>
                                 </div>
                                 
-                                {/* Label and description */}
+                                {/* Label e descrição */}
                                 <div>
                                     <h3 className="text-xl font-semibold text-gray-900 mb-3">
                                         {stat.label}
@@ -183,7 +183,7 @@ export default function Stats() {
                                 <div className="text-sm text-gray-500">já otimizaram seus processos</div>
                             </div>
                         </div>
-                        <button className="px-8 py-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold rounded-full hover:shadow-xl transform hover:cursor-pointer hover:-translate-y-0.5 transition-all duration-300">
+                        <button className="px-8 py-3 bg-gradient-to-r from-gray-900 to-black text-white font-semibold rounded-full hover:shadow-xl transform hover:cursor-pointer hover:-translate-y-0.5 transition-all duration-200">
                             Ver demonstração
                         </button>
                     </div>

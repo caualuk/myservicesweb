@@ -1,19 +1,49 @@
 "use client";
 
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import FilterTab from "./FilterTab";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [query, setQuery] = useState("");
+  const [cities, setCities] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (query.length < 2) {
+      setCities([]);
+      return;
+    }
+
+    const delay = setTimeout(async () => {
+      setLoading(true);
+
+      try {
+        const res = await fetch(
+          `http://localhost:8000/cities/search?q=${query}`,
+        );
+
+        const data = await res.json();
+        setCities(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }, 300); // debounce
+
+    return () => clearTimeout(delay);
+  }, [query]);
 
   return (
-    <form className="space-y-5">
+    <form className="space-y-3">
       <div>
         <label className="text-sm text-gray-600">Nome:</label>
         <input
           type="text"
           placeholder="Insira seu nome"
-          className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
         />
       </div>
 
@@ -22,8 +52,56 @@ export default function RegisterForm() {
         <input
           type="email"
           placeholder="nome@usuario.com.br"
-          className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
         />
+      </div>
+
+      <div className="relative">
+        <label className="text-sm text-gray-600">Cidade:</label>
+
+        <input
+          type="text"
+          placeholder="Digite sua cidade"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+        />
+
+        {/* Dropdown bonito */}
+        {cities.length > 0 && (
+          <ul
+            className="
+        absolute
+        w-full
+        bg-white
+        border border-gray-300
+        rounded-lg
+        mt-1
+        shadow-lg
+        max-h-52
+        overflow-y-auto
+        z-50
+      "
+          >
+            {cities.map((city: any) => (
+              <li
+                key={city.id}
+                onClick={() => {
+                  setQuery(`${city.name} - ${city.state}`);
+                  setCities([]);
+                }}
+                className="
+            px-3 py-2
+            cursor-pointer
+            hover:bg-indigo-50
+            transition
+          "
+              >
+                {city.name} - {city.state}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div>
@@ -32,7 +110,7 @@ export default function RegisterForm() {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="nome@123"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
           />
           <button
             type="button"
@@ -67,8 +145,12 @@ export default function RegisterForm() {
         <input
           type={showPassword ? "text" : "password"}
           placeholder="nome@123"
-          className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
         />
+      </div>
+
+      <div className="mb-6">
+        <FilterTab />
       </div>
 
       <button
